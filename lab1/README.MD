@@ -115,8 +115,6 @@ curl -s -X DELETE http://localhost:8081/api/v1/devices/1 \
 - **Доступ только с localhost**: `/api/v1/auth/**` и `/api/v1/devices/**` разрешены только с `127.0.0.1`/`::1`.
 - **Запрет всего прочего**: `anyRequest().denyAll()`.
 
-Ключевые классы: `SecurityConfig`, `JwtAuthenticationFilter`, `JWTUtil`, `AuthService`.
-
 ### Защита от SQL Injection (SQLi)
 - **Spring Data JPA**: используются репозитории и методы с параметрами (`findByUsername`, `findByIdAndUsername`, `existsByFingerprint` и др.),
   что транслируется в подготовленные выражения Hibernate — без конкатенации SQL-строк.
