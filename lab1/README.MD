@@ -148,5 +148,10 @@ curl -s -X DELETE http://localhost:8081/api/v1/devices/1 \
 ## Postman коллекция
 - Коллекция: `docs/IS-Lab1.postman_collection.json`
 - Окружение: `docs/IS-Lab1.postman_environment.json`
-
+ - Скриншоты (Postman):
+   - Логин: ![Login](docs/login.png)
+   - Авторизованный POST /api/v1/devices: ![Authorized POST](docs/authorized-post.png)
+   - Авторизованное DELETE /api/v1/devices/{id}: ![Authorized DELETE](docs/authorized-del.png)
+   - Неавторизованный GET /api/v1/devices: ![Unauthorized GET](docs/unauthorized-get.png)
+   - Неавторизованное DELETE /api/v1/devices/{id}: ![Unauthorized DELETE](docs/unauthorized-del.png)
 
