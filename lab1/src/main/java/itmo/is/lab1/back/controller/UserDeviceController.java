@@ -4,7 +4,7 @@ import itmo.is.lab1.back.dto.UserDeviceRequestDTO;
 import itmo.is.lab1.back.dto.UserDeviceResponseDTO;
 import itmo.is.lab1.back.service.UserDeviceService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/devices")
 public class UserDeviceController {
 
-   private final UserDeviceService userDeviceService;
+   @Autowired
+   private UserDeviceService userDeviceService;
 
    @GetMapping
    public ResponseEntity<List<UserDeviceResponseDTO>> list(Authentication authentication) {

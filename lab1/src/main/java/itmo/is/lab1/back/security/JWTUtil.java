@@ -1,5 +1,6 @@
 package itmo.is.lab1.back.security;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 import java.util.Date;
@@ -35,24 +36,37 @@ public class JWTUtil {
 
    @PostConstruct
    public void init() {
+      String configuredSecret = secretKeyString == null ? "" : secretKeyString.trim();
 
-      try {
-
-         try {
-            secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
-            log.info("Using provided JWT secret key");
-         } catch (Exception e) {
-            log.warn("Provided JWT secret key is invalid or too weak. Generating a secure key...");
-            secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-            log.info("Generated secure JWT secret key");
-         }
-
-      } catch (Exception e) {
-         log.error("Error initializing JWT secret key", e);
-         secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-         log.info("Using fallback secure JWT secret key");
+      byte[] keyBytes;
+      if (looksLikeBase64(configuredSecret)) {
+         keyBytes = Base64.getDecoder().decode(configuredSecret);
+      } else {
+         keyBytes = configuredSecret.getBytes(StandardCharsets.UTF_8);
       }
 
+      if (keyBytes.length >= 32) {
+         secretKey = Keys.hmacShaKeyFor(keyBytes);
+         log.info("Using provided JWT secret key");
+      } else {
+         log.warn("Provided JWT secret key is invalid or too weak. Generating a secure key...");
+         secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+         log.info("Generated secure JWT secret key");
+      }
+   }
+
+   private boolean looksLikeBase64(String value) {
+      if (value == null || value.isEmpty()) {
+         return false;
+      }
+      if ((value.length() % 4) != 0) {
+         return false;
+      }
+      if (!value.matches("^[A-Za-z0-9+/]+={0,2}$")) {
+         return false;
+      }
+      int pad = value.indexOf('=');
+      return pad == -1 || pad >= value.length() - 2;
    }
 
    public String generateToken(String username) {
