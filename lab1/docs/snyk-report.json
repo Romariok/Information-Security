@@ -1,0 +1,437 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-JAVA-ORGSPRINGFRAMEWORK-12817817",
+      "title": "Incorrect Authorization",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "credit": [
+        "Sam Brannen"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,6.2.11)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "6.2.11"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "java",
+      "severity": "high",
+      "cvssScore": 8.7,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "org.springframework:spring-core",
+      "references": [
+        {
+          "url": "https://github.com/spring-projects/spring-framework/commit/6d710d482a6785b069e35022e81758953afc21ff",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-framework/issues/35342",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-framework/releases/tag/v6.2.11",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://spring.io/security/cve-2025-41249",
+          "title": "Vendor Advisory"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2025-09-18T13:36:04.157972Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 8.7,
+          "cvssVersion": "4.0",
+          "modificationTime": "2025-09-17T21:24:40.484340Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-09-17T21:24:40.484340Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-09-18T13:36:04.157972Z"
+        }
+      ],
+      "description": "## Overview\n[org.springframework:spring-core](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-core%22) is a core package within the spring-framework that contains multiple classes and utilities.\n\nAffected versions of this package are vulnerable to Incorrect Authorization via the `AnnotationsScanner` and `AnnotatedMethod` class. An attacker can gain unauthorized access to sensitive information by exploiting improper resolution of annotations on methods within type hierarchies that use parameterized supertypes with unbounded generics.\r\n\r\n**Note:**\r\nThis is only exploitable if security annotations are used on methods in generic superclasses or generic interfaces and the `@EnableMethodSecurity` feature is enabled.\n## Remediation\nUpgrade `org.springframework:spring-core` to version 6.2.11 or higher.\n## References\n- [GitHub Commit](https://github.com/spring-projects/spring-framework/commit/6d710d482a6785b069e35022e81758953afc21ff)\n- [GitHub Issue](https://github.com/spring-projects/spring-framework/issues/35342)\n- [GitHub Release](https://github.com/spring-projects/spring-framework/releases/tag/v6.2.11)\n- [Vendor Advisory](https://spring.io/security/cve-2025-41249)\n",
+      "epssDetails": null,
+      "identifiers": {
+        "CVE": [
+          "CVE-2025-41249"
+        ],
+        "CWE": [
+          "CWE-863"
+        ],
+        "GHSA": [
+          "GHSA-jmp9-x22r-554x"
+        ]
+      },
+      "packageName": "org.springframework:spring-core",
+      "proprietary": false,
+      "creationTime": "2025-09-17T08:55:00.300239Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2025-09-16T15:32:34Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "maven",
+      "mavenModuleName": {
+        "groupId": "org.springframework",
+        "artifactId": "spring-core"
+      },
+      "publicationTime": "2025-09-17T21:24:40.464102Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2025-09-18T13:36:04.157972Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "itmo.is.lab1:back@0.0.1-SNAPSHOT",
+        "org.springframework.boot:spring-boot-starter-test@3.5.5",
+        "org.springframework:spring-core@6.2.10"
+      ],
+      "upgradePath": [
+        false,
+        "org.springframework.boot:spring-boot-starter-test@3.5.6",
+        "org.springframework:spring-core@6.2.11"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "org.springframework:spring-core",
+      "version": "6.2.10"
+    },
+    {
+      "id": "SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITY-12817818",
+      "title": "Incorrect Authorization",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "credit": [
+        "Unknown"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[6.4.4,6.4.10)",
+          "[6.5.0,6.5.4)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "6.4.10",
+        "6.5.4"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "java",
+      "severity": "high",
+      "cvssScore": 8.7,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "org.springframework.security:spring-security-core",
+      "references": [
+        {
+          "url": "https://github.com/spring-projects/spring-security/commit/d0f93fa6d8338149943ae640c53db07de827867f",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-security/commit/e5694ac7b5e4394b920c6cab48b7bfbd871f84bd",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-security/issues/17898",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-security/issues/17899",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-security/releases/tag/6.4.10",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://github.com/spring-projects/spring-security/releases/tag/6.5.4",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://spring.io/security/cve-2025-41248",
+          "title": "Vendor Advisory"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2025-09-17T13:35:01.964706Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 8.7,
+          "cvssVersion": "4.0",
+          "modificationTime": "2025-09-17T21:27:03.250881Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-09-17T21:27:03.250881Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-09-17T13:35:01.964706Z"
+        }
+      ],
+      "description": "## Overview\n[org.springframework.security:spring-security-core](http://spring.io/spring-security) is a package that provides security services for the Spring IO Platform.\n\nAffected versions of this package are vulnerable to Incorrect Authorization via the annotation detection mechanism when resolving annotations on methods within type hierarchies that use a parameterized super type with unbounded generics. An attacker can gain unauthorized access to protected resources by invoking methods that should be secured but are not properly checked due to incorrect annotation resolution.\r\n\r\n**Note:**\r\nThis is only exploitable if the application uses the `@EnableMethodSecurity` feature and applies security annotations on methods in generic superclasses or generic interfaces.\n## Remediation\nUpgrade `org.springframework.security:spring-security-core` to version 6.4.10, 6.5.4 or higher.\n## References\n- [GitHub Commit](https://github.com/spring-projects/spring-security/commit/d0f93fa6d8338149943ae640c53db07de827867f)\n- [GitHub Commit](https://github.com/spring-projects/spring-security/commit/e5694ac7b5e4394b920c6cab48b7bfbd871f84bd)\n- [GitHub Issue](https://github.com/spring-projects/spring-security/issues/17898)\n- [GitHub Issue](https://github.com/spring-projects/spring-security/issues/17899)\n- [GitHub Release](https://github.com/spring-projects/spring-security/releases/tag/6.4.10)\n- [GitHub Release](https://github.com/spring-projects/spring-security/releases/tag/6.5.4)\n- [Vendor Advisory](https://spring.io/security/cve-2025-41248)\n",
+      "epssDetails": null,
+      "identifiers": {
+        "CVE": [
+          "CVE-2025-41248"
+        ],
+        "CWE": [
+          "CWE-863"
+        ],
+        "GHSA": [
+          "GHSA-8v5q-rhf3-jphm"
+        ]
+      },
+      "packageName": "org.springframework.security:spring-security-core",
+      "proprietary": false,
+      "creationTime": "2025-09-17T09:04:50.853043Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2025-09-16T15:32:34Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "maven",
+      "mavenModuleName": {
+        "groupId": "org.springframework.security",
+        "artifactId": "spring-security-core"
+      },
+      "publicationTime": "2025-09-17T21:27:03.241864Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2025-09-17T21:27:03.250881Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "itmo.is.lab1:back@0.0.1-SNAPSHOT",
+        "org.springframework.boot:spring-boot-starter-security@3.5.5",
+        "org.springframework.security:spring-security-config@6.5.3",
+        "org.springframework.security:spring-security-core@6.5.3"
+      ],
+      "upgradePath": [
+        false,
+        "org.springframework.boot:spring-boot-starter-security@3.5.6",
+        "org.springframework.security:spring-security-config@6.5.5",
+        "org.springframework.security:spring-security-core@6.5.5"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "org.springframework.security:spring-security-core",
+      "version": "6.5.3"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 78,
+  "org": "romariok",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "maven",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false
+  },
+  "summary": "2 vulnerable dependency paths",
+  "remediation": {
+    "unresolved": [],
+    "upgrade": {
+      "org.springframework.boot:spring-boot-starter-security@3.5.5": {
+        "upgradeTo": "org.springframework.boot:spring-boot-starter-security@3.5.6",
+        "upgrades": [
+          "org.springframework.security:spring-security-core@6.5.3"
+        ],
+        "vulns": [
+          "SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITY-12817818"
+        ]
+      },
+      "org.springframework.boot:spring-boot-starter-test@3.5.5": {
+        "upgradeTo": "org.springframework.boot:spring-boot-starter-test@3.5.6",
+        "upgrades": [
+          "org.springframework:spring-core@6.2.10"
+        ],
+        "vulns": [
+          "SNYK-JAVA-ORGSPRINGFRAMEWORK-12817817"
+        ]
+      }
+    },
+    "patch": {},
+    "ignore": {},
+    "pin": {}
+  },
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 2,
+  "projectName": "itmo.is.lab1:back",
+  "displayTargetFile": "pom.xml",
+  "hasUnknownVersions": false,
+  "path": "/home/runner/work/Information-Security/Information-Security/lab1"
+}
