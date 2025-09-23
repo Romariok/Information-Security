@@ -1,0 +1,33 @@
+The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.
+
+GET http://localhost:3000/assets HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+HTTP/1.1 301 Moved Permanently
+Access-Control-Allow-Origin: *
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Feature-Policy: payment 'self'
+X-Recruiting: /#/jobs
+Content-Type: text/html; charset=UTF-8
+Content-Length: 156
+Content-Security-Policy: default-src 'none'
+Location: /assets/
+Vary: Accept-Encoding
+Date: Tue, 23 Sep 2025 08:44:30 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Redirecting</title>
+</head>
+<body>
+<pre>Redirecting to /assets/</pre>
+</body>
+</html>

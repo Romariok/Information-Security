@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "3a7a583d-053b-4466-a8dd-6084c8cf020e",
+		"name": "InfSec3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38982236"
+	},
+	"item": [
+		{
+			"name": "Rewriting session id in URL",
+			"item": [
+				{
+					"name": "handshake",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('timestamp', Date.now());"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = pm.response.text();",
+									"const m = body.match(/\"sid\":\"([A-Za-z0-9_-]+)\"/);",
+									"pm.test('SID получен из ответа', function () {",
+									"  pm.expect(m).to.not.be.null;",
+									"});",
+									"if (m) {",
+									"  pm.collectionVariables.set('sid', m[1]);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/socket.io/?EIO=4&transport=polling&t={{timestamp}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socket.io",
+								""
+							],
+							"query": [
+								{
+									"key": "EIO",
+									"value": "4"
+								},
+								{
+									"key": "transport",
+									"value": "polling"
+								},
+								{
+									"key": "t",
+									"value": "{{timestamp}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Id replacement",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('timestamp', Date.now());"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('SID передан в URL', function () {",
+									"  const currentSid = pm.collectionVariables.get('sid');",
+									"  pm.expect(pm.request.url.toString()).to.include('sid=' + currentSid);",
+									"});",
+									"pm.test('Ответ OK', function () {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200, 204]); // зависит от сервера",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Referer",
+								"value": "http://localhost:3000/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/socket.io/?EIO=4&transport=websocket&sid={{sid}}&t={{timestamp}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socket.io",
+								""
+							],
+							"query": [
+								{
+									"key": "EIO",
+									"value": "4"
+								},
+								{
+									"key": "transport",
+									"value": "websocket"
+								},
+								{
+									"key": "sid",
+									"value": "{{sid}}"
+								},
+								{
+									"key": "t",
+									"value": "{{timestamp}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "No CSP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Нет заголовка Content-Security-Policy', function () {",
+							"  pm.expect(pm.response.headers.has('Content-Security-Policy')).to.equal(false);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CSP with no fallback",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const csp = pm.response.headers.get('Content-Security-Policy') || '';",
+							"['frame-ancestors','form-action','base-uri'].forEach(d => {",
+							"  pm.test(`Директива отсутствует: ${d}`, function () {",
+							"    pm.expect(csp.includes(d)).to.equal(false);",
+							"  });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/assets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"assets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CORS misconfiguration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const acao = pm.response.headers.get('Access-Control-Allow-Origin');",
+							"pm.test('ACAO разрешает произвольный Origin', function () {",
+							"  pm.expect(acao).to.be.oneOf(['*', 'http://evil.test']);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://evil.test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SQLi",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/rest/products/search?q=%27%29%20OR%201%3D1%29--%20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rest",
+						"products",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "%27%29%20OR%201%3D1%29--%20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "timestamp",
+			"value": ""
+		},
+		{
+			"key": "sid",
+			"value": ""
+		}
+	]
+}

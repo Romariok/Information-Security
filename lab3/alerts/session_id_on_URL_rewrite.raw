@@ -1,0 +1,22 @@
+Перезапись URL используется для отслеживания идентификатора сеанса пользователя. 
+Идентификатор сеанса может быть раскрыт через заголовок межсайтового реферера. 
+Кроме того, идентификатор сеанса может храниться в истории браузера или журналах сервера. 
+
+GET http://localhost:3000/socket.io/?EIO=4&transport=polling&t=PbrjMQ8&sid=dajRvG9dlmHmmo4nAAAC HTTP/1.1
+host: localhost:3000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0
+Accept: */*
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Connection: keep-alive
+Referer: http://localhost:3000/
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:4200
+Vary: Origin
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 32
+Date: Tue, 23 Sep 2025 08:34:06 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+40{"sid":"S07s1d3wfYvsNN5uAAAD"}

